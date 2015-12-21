@@ -1,0 +1,23 @@
+app:
+  image: busybox
+  volumes:
+    - ./app:/var/www/app
+  tty: true
+
+nginx:
+  image: tunght13488/nginx
+  links:
+    - php
+  volumes_from:
+    - app
+  environment:
+    DOCUMENT_ROOT: /var/www/app
+    INDEX_FILE: index.php
+    PHP_FPM_SOCKET: php:9000
+    DNSDOCK_ALIAS: www.project.docker
+
+php:
+  image: yappabe/php:7.0
+  working_dir: /var/www/app
+  volumes_from:
+    - app
