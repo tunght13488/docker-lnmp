@@ -12,5 +12,3 @@ COPY default.conf /etc/nginx/conf.d
 RUN echo "upstream php-upstream { server $PHP_FPM_SOCKET; }" > /etc/nginx/conf.d/upstream.conf && \
     sed -i "s|DOCUMENT_ROOT|$DOCUMENT_ROOT|g" /etc/nginx/conf.d/default.conf && \
     sed -i "s|INDEX_FILE|$INDEX_FILE|g" /etc/nginx/conf.d/default.conf
-
-RUN usermod -u 1000 www-data
