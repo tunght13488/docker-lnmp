@@ -18,5 +18,15 @@ nginx:
 php:
   build: docker/php
   working_dir: /var/www/app
+  links:
+    - mysql
   volumes_from:
     - app
+
+mysql:
+  build: docker/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: noop
+    MYSQL_DATABASE: mydb
+    MYSQL_USER: dbuser
+    MYSQL_PASSWORD: dbpass
